@@ -1,0 +1,10 @@
+import express from "express";
+import { adminGetAll, adminGetOne, createOne, deleteOne, updateOne } from "../controllers/book.controller";
+import { adminGetOrders } from "../controllers/order.controller";
+import { currentUser } from "../middlewares/currentUser";
+const Router = express.Router();
+Router.route("/product").get(currentUser, adminGetAll).post(currentUser, createOne);
+Router.route("/product/:id").delete(currentUser, deleteOne);
+Router.route("/product/:slug").get(currentUser, adminGetOne).put(currentUser, updateOne);
+Router.route("/order").get(currentUser, adminGetOrders);
+export default Router;
